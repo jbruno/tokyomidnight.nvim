@@ -1,3 +1,12 @@
+# Toko Midnight
+
+[Tokyo Night](https://github.com/folke/tokyonight.nvim) has awesome plugin integration, but the color scheme
+itself does not really do it for me, and manual override of colors got too unwieldy.
+
+I'm stealing a lot of design choices from [midnight.nvim](https://github.com/dasupradyumna/midnight.nvim).
+
+Documentation for [Tokyo Night](https://github.com/folke/tokyonight.nvim) follows unmodified.
+
 # 🏙 Tokyo Night
 
 A dark and light [Neovim](https://github.com/neovim/neovim) theme written in
