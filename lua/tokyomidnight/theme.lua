@@ -1,5 +1,5 @@
-local util = require("tokyonight.util")
-local colors = require("tokyonight.colors")
+local util = require("tokyomidnight.util")
+local colors = require("tokyomidnight.colors")
 
 local M = {}
 --
@@ -14,7 +14,7 @@ local M = {}
 
 ---@return Theme
 function M.setup()
-  local config = require("tokyonight.config")
+  local config = require("tokyomidnight.config")
   local options = config.options
   ---@class Theme
   ---@field highlights Highlights
