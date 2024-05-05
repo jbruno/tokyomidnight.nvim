@@ -1,4 +1,4 @@
-# Toko Midnight
+# Tokyo Midnight
 
 [Tokyo Night](https://github.com/folke/tokyonight.nvim) has awesome plugin integration, but the color scheme
 itself does not really do it for me, and manual override of colors got too unwieldy.
