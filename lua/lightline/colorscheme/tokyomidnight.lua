@@ -1,4 +1,4 @@
-local colors = require("tokyonight.colors").setup({ transform = true })
+local colors = require("tokyomidnight.colors").setup({ transform = true })
 
 local tokyonight = {}
 

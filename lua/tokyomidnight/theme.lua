@@ -1,5 +1,5 @@
-local util = require("tokyonight.util")
-local colors = require("tokyonight.colors")
+local util = require("tokyomidnight.util")
+local colors = require("tokyomidnight.colors")
 
 local M = {}
 --
@@ -14,7 +14,7 @@ local M = {}
 
 ---@return Theme
 function M.setup()
-  local config = require("tokyonight.config")
+  local config = require("tokyomidnight.config")
   local options = config.options
   ---@class Theme
   ---@field highlights Highlights
@@ -24,6 +24,11 @@ function M.setup()
   }
 
   local c = theme.colors
+
+  local is_midnight = config.options.style == "midnight"
+  if is_midnight then
+    -- TODO: need to do something with transparent bg here??
+  end
 
   theme.highlights = {
     Foo = { bg = c.magenta2, fg = c.fg },
@@ -789,6 +794,66 @@ function M.setup()
     Hlargs = { fg = c.yellow },
     -- TreesitterContext = { bg = util.darken(c.bg_visual, 0.4) },
   }
+
+  -- Keep all midnight-specific changes here for easy updates
+  if is_midnight then
+
+    -- Additional transparency support
+
+    -- Common highlight groups
+    theme.highlights.Constant = { fg = c.blue0 }
+    theme.highlights.String = { fg = c.green2 }
+    theme.highlights.Character = { fg = c.green2 }
+    theme.highlights.Function = { fg = c.yellow, style = options.styles.functions } -- function name (also: methods for classes)
+    theme.highlights.Statement = { fg = c.purple }
+    theme.highlights.Operator = { fg = c.red }
+    theme.highlights.Keyword = { fg = c.purple, style = options.styles.keywords }
+    theme.highlights.StorageClass = { fg = c.red }
+    theme.highlights.PreProc = { fg = c.red }
+    theme.highlights.Macro = { link = "Constant" }
+
+    -- TreeSitter capture groups
+    theme.highlights["@constant.builtin"] = { link = "Constant" }
+    theme.highlights["@punctuation.delimiter"] = { fg = c.fg_dark  } -- For delimiters ie: `.`
+    theme.highlights["@punctuation.bracket"] = { fg = c.fg_dark } -- For brackets and parens.
+    theme.highlights["@punctuation.special"] = { fg = c.purple } -- For special symbols (e.g. `{}` in string interpolation)
+    theme.highlights["@operator"] = { fg = c.red }
+    theme.highlights["@variable.parameter"] = { fg = c.blue5 }
+    theme.highlights["@keyword.function"] = { fg = c.purple, style = options.styles.functions }
+    theme.highlights["@type.builtin"] = { fg = c.purple }
+    theme.highlights["@variable"] = { fg = c.blue6, style = options.styles.variables } -- Any variable name that does not have another highlight.
+    theme.highlights["@variable.builtin"] = { fg = c.purple }
+    theme.highlights["@module.builtin"] = { fg = c.magenta }
+    theme.highlights["@module"] = { fg = c.magenta }
+
+    -- LSP semantic coloring
+    theme.highlights["@lsp.type.operator"] = { link = "Statement" }
+    theme.highlights["@lsp.type.variable"] = { link = "@variable" }
+    theme.highlights["@lsp.typemod.class.deduced"] = { link = "@type.builtin" }
+    theme.highlights["@lsp.typemod.class.defaultLibrary"] = { link = "@type" }
+    theme.highlights["@lsp.typemod.enum.defaultLibrary"] = { link = "@type" }
+    theme.highlights["@lsp.typemod.type.defaultLibrary"] = { link = "@type" }
+    theme.highlights["@lsp.typemod.typeAlias.defaultLibrary"] = { link = "@type" }
+    theme.highlights["@lsp.typemod.macro.defaultLibrary"] = { link = "@function" }
+    theme.highlights["@lsp.typemod.method.defaultLibrary"] = { link = "@function" }
+    theme.highlights["@lsp.typemod.function.defaultLibrary"] = { link = "@function" }
+
+    --
+    -- Specific language formatting
+
+    -- Lua
+
+    -- Python
+
+
+    --
+    -- Library formatting
+
+    -- NvimTree
+    -- Barbar
+    -- TodoComments
+
+  end
 
   -- lsp symbol kind and completion kind highlights
   local kinds = {

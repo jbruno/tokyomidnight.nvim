@@ -1,4 +1,4 @@
-local util = require("tokyonight.util")
+local util = require("tokyomidnight.util")
 
 local M = {}
 
@@ -95,10 +95,54 @@ M.moon = function()
   return ret
 end
 
+---@class Palette
+M.midnight = {
+  none = "NONE",
+  bg_dark = "#070a0e",
+  bg = "#090f15",
+  bg_highlight = "#1a2533",
+  terminal_black = "#475c71",
+  fg = "#b5bdc5",
+  fg_dark = "#b5bdc5",
+  fg_gutter = "#49525a",
+  dark3 = "#54697d",
+  comment = "#878d96",
+  dark5 = "#678aad",
+  blue0 = "#5080ff",
+  blue = "#78a9ff",
+  cyan = "#82cfff",
+  blue1 = "#0ab6ba",
+  blue2 = "#048e90",
+  blue5 = "#50b0e0",
+  blue6 = "#9ac6e0",
+  blue7 = "#394b70", --default
+  magenta = "#a3a0d8",
+  magenta2 = "#ff007c", --default
+  purple = "#a665d0",
+  orange = "#ff9d57",
+  yellow = "#c8b670",
+  green = "#59a66e",
+  green1 = "#8dc9a7",
+  green2 = "#4da371",
+  teal = "#1aa7bc",
+  red = "#ff7279",
+  red1 = "#fa4d56",
+  git = {
+    add = "#42be65",
+    change = "#d2a106",
+    delete = "#fa4d56",
+  },
+  gitSigns = {
+    add = "#42be65",
+    change = "#d2a106",
+    delete = "#fa4d56",
+  },
+}
+
 ---@return ColorScheme
 function M.setup(opts)
   opts = opts or {}
-  local config = require("tokyonight.config")
+  local config = require("tokyomidnight.config")
 
   local style = config.is_day() and config.options.light_style or config.options.style
   local palette = M[style] or {}
@@ -154,6 +198,33 @@ function M.setup(opts)
     add = util.darken(colors.green2, 0.45),
     delete = util.darken(colors.red1, 0.45),
   }
+
+  local is_midnight = config.options.style == "midnight"
+  if is_midnight then
+    colors.diff.add = "#04230a"
+    colors.diff.change = "#261d00"
+    colors.diff.delete = "#2d0709"
+    colors.diff.text = "#483700"
+
+    colors.git.ignore = colors.comment
+
+    colors.border_highlight = colors.fg_gutter
+
+    colors.bg_statusline = colors.bg_highlight
+
+    colors.bg_visual = util.lighten(colors.bg_highlight, 0.9, util.invert_color(colors.bg_dark))
+    colors.bg_search = util.darken(colors.blue0, 0.4)
+
+    -- colors.error = "" --default
+    colors.todo = "#a6c8ff"
+    colors.warning = "#ff9d57"
+    colors.info = "#a6c8ff"
+    colors.hint = "#adb5bd"
+
+    -- Unused
+    -- colors.delta.add =
+    -- colors.delta.delete =
+  end
 
   config.options.on_colors(colors)
   if opts.transform and config.is_day() then

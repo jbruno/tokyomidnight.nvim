@@ -1,5 +1,5 @@
-local colors = require("tokyonight.colors").setup({ transform = true })
-local config = require("tokyonight.config").options
+local colors = require("tokyomidnight.colors").setup({ transform = true })
+local config = require("tokyomidnight.config").options
 
 local tokyonight = {}
 
