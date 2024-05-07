@@ -35,7 +35,7 @@ function M.lighten(hex, amount, fg)
 end
 
 function M.invert_color(color)
-  local hsluv = require("tokyomidnight.hsluv")
+  local hsluv = require("tokyonight.hsluv")
   if color ~= "NONE" then
     local hsl = hsluv.hex_to_hsluv(color)
     hsl[3] = 100 - hsl[3]
@@ -65,7 +65,7 @@ end
 
 ---@param config Config
 function M.autocmds(config)
-  local group = vim.api.nvim_create_augroup("tokyomidnight", { clear = true })
+  local group = vim.api.nvim_create_augroup("tokyonight", { clear = true })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     group = group,
@@ -181,7 +181,7 @@ function M.load(theme)
   end
 
   vim.o.termguicolors = true
-  vim.g.colors_name = "tokyomidnight"
+  vim.g.colors_name = "tokyonight"
 
   M.syntax(theme.highlights)
 

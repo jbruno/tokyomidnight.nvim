@@ -1,1 +1,0 @@
-require("tokyomidnight")._load()

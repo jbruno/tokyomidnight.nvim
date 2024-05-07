@@ -1,4 +1,4 @@
-local util = require("tokyomidnight.util")
+local util = require("tokyonight.util")
 
 local M = {}
 
@@ -98,7 +98,7 @@ end
 ---@return ColorScheme
 function M.setup(opts)
   opts = opts or {}
-  local config = require("tokyomidnight.config")
+  local config = require("tokyonight.config")
 
   local style = config.is_day() and config.options.light_style or config.options.style
   local palette = M[style] or {}
