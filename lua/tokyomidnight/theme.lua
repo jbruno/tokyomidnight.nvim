@@ -25,9 +25,10 @@ function M.setup()
 
   local c = theme.colors
 
-  local is_midnight = config.options.style == "midnight"
+  -- Some midnight-specific changes up front
+  local is_midnight = options.style == "midnight"
   if is_midnight then
-    -- TODO: need to do something with transparent bg here??
+    c.bg_statusline = options.transparent and c.none or c.bg
   end
 
   theme.highlights = {
@@ -869,11 +870,102 @@ function M.setup()
     theme.highlights['@variable.builtin.python'] = { link = 'Keyword' }
 
     --
-    -- Library formatting
+    -- Plugin formatting
+
+    -- TreesitterContext
+    theme.highlights.TreesitterContext.bg = options.transparent and c.none or c.bg_highlight
+    theme.highlights.TreesitterContextSeparator = { fg = c.blue }
+
+    -- Telescope
+    theme.highlights.TelescopePromptBorder.fg = c.blue
+    theme.highlights.TelescopePromptTitle.fg = c.blue
 
     -- NvimTree
+    theme.highlights.NvimTreeWindowPicker = { bg = c.bg_highlight, fg = c.fg }
+    theme.highlights.NvimTreeGitIgnored = { fg = c.git.ignore }
+    theme.highlights.NvimTreeModifiedicon = { fg = util.lighten(c.purple, 0.8) }
+
     -- Barbar
+    local active_bg = c.bg_highlight
+    local inactive_bg = options.transparent and c.none or c.bg
+    local primary_fg = c.comment
+    local active_fg = c.fg
+
+    theme.highlights.TabLine = { bg = inactive_bg }
+    theme.highlights.TabLineFill = { bg = inactive_bg }
+    theme.highlights.TabLineSel = { bg = inactive_bg }
+    theme.highlights.BufferTabpageFill = { bg = inactive_bg }
+
+    theme.highlights.BufferInactive = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferInactiveSignRight = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferInactiveNumber = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferInactiveIndex = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferInactiveSign = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferInactiveIcon = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferInactiveADDED = { bg = inactive_bg, fg = c.git.add }
+    theme.highlights.BufferInactiveCHANGED = { bg = inactive_bg, fg = c.git.change }
+    theme.highlights.BufferInactiveDELETED = { bg = inactive_bg, fg = c.git.delete }
+    theme.highlights.BufferInactiveERROR = { bg = inactive_bg, fg = c.error }
+    theme.highlights.BufferInactiveWARN = { bg = inactive_bg, fg = c.warning }
+    theme.highlights.BufferInactiveINFO = { bg = inactive_bg, fg = c.info }
+    theme.highlights.BufferInactiveHINT = { bg = inactive_bg, fg = c.hint }
+    theme.highlights.BufferInactiveMod = { bg = inactive_bg, fg = c.orange }
+    theme.highlights.BufferInactiveTarget = { bg = inactive_bg, fg = c.cyan, bold = true }
+
+    theme.highlights.BufferVisible = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferVisibleSignRight = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferVisibleNumber = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferVisibleIndex = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferVisibleSign = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferVisibleIcon = { bg = inactive_bg, fg = primary_fg }
+    theme.highlights.BufferVisibleADDED = { bg = inactive_bg, fg = c.git.add }
+    theme.highlights.BufferVisibleCHANGED = { bg = inactive_bg, fg = c.git.change }
+    theme.highlights.BufferVisibleDELETED = { bg = inactive_bg, fg = c.git.delete }
+    theme.highlights.BufferVisibleERROR = { bg = inactive_bg, fg = c.error }
+    theme.highlights.BufferVisibleWARN = { bg = inactive_bg, fg = c.warning }
+    theme.highlights.BufferVisibleINFO = { bg = inactive_bg, fg = c.info }
+    theme.highlights.BufferVisibleHINT = { bg = inactive_bg, fg = c.hint }
+    theme.highlights.BufferVisibleMod = { bg = inactive_bg, fg = c.orange }
+    theme.highlights.BufferVisibleTarget = { bg = inactive_bg, fg = c.cyan, bold = true }
+
+    theme.highlights.BufferCurrent = { bg = active_bg, fg = active_fg, bold = true }
+    theme.highlights.BufferCurrentSignRight = { bg = active_bg, fg = active_fg, bold = true }
+    theme.highlights.BufferCurrentNumber = { bg = active_bg, fg = active_fg, bold = true }
+    theme.highlights.BufferCurrentIndex = { bg = active_bg, fg = active_fg, bold = true }
+    theme.highlights.BufferCurrentSign = { bg = active_bg, fg = active_fg, bold = true }
+    theme.highlights.BufferCurrentIcon = { bg = active_bg, fg = active_fg, bold = true }
+    theme.highlights.BufferCurrentADDED = { bg = active_bg, fg = c.git.add, bold = true }
+    theme.highlights.BufferCurrentCHANGED = { bg = active_bg, fg = c.git.change, bold = true }
+    theme.highlights.BufferCurrentDELETED = { bg = active_bg, fg = c.git.delete, bold = true }
+    theme.highlights.BufferCurrentERROR = { bg = active_bg, fg = c.error, bold = true }
+    theme.highlights.BufferCurrentWARN = { bg = active_bg, fg = c.warning, bold = true }
+    theme.highlights.BufferCurrentINFO = { bg = active_bg, fg = c.info, bold = true }
+    theme.highlights.BufferCurrentHINT = { bg = active_bg, fg = c.hint, bold = true }
+    theme.highlights.BufferCurrentMod = { bg = active_bg, fg = c.orange, bold = true }
+    theme.highlights.BufferCurrentTarget = { bg = active_bg, fg = c.cyan, bold = true }
+
     -- TodoComments
+    theme.highlights.TodoBgFix = { fg = c.bg, bg = c.error, style = 'bold' }
+    theme.highlights.TodoBgHack = { fg = c.bg, bg = c.warning, style = 'bold' }
+    theme.highlights.TodoBgNote = { fg = c.bg, bg = c.hint, style = 'bold' }
+    theme.highlights.TodoBgPerf = { fg = c.bg, bg = c.green1, style = 'bold' }
+    theme.highlights.TodoBgTest = { fg = c.bg, bg = c.blue1, style = 'bold' }
+    theme.highlights.TodoBgTodo = { fg = c.bg, bg = c.info, style = 'bold' }
+    theme.highlights.TodoBgWarn = { fg = c.bg, bg = c.warning, style = 'bold' }
+    theme.highlights.TodoFgFix = { fg = c.error }
+    theme.highlights.TodoFgHack = { fg = c.warning }
+    theme.highlights.TodoFgNote = { fg = c.hint }
+    theme.highlights.TodoFgPerf = { fg = c.green1 }
+    theme.highlights.TodoFgTest = { fg = c.blue1 }
+    theme.highlights.TodoFgTodo = { fg = c.info }
+    theme.highlights.TodoFgWarn = { fg = c.warning }
+    theme.highlights.TodoSignFix = { link = 'TodoFgFix' }
+    theme.highlights.TodoSignHack = { link = 'TodoFgHack' }
+    theme.highlights.TodoSignNote = { link = 'TodoFgNote' }
+    theme.highlights.TodoSignPerf = { link = 'TodoFgPerf' }
+    theme.highlights.TodoSignTest = { link = 'TodoFgTest' }
+    theme.highlights.TodoSignTodo = { link = 'TodoFgTodo' }
+    theme.highlights.TodoSignWarn = { link = 'TodoFgWarn' }
 
   end
 
