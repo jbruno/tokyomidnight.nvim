@@ -802,6 +802,7 @@ function M.setup()
     -- Additional transparency support
 
     -- Common highlight groups
+    theme.highlights.Title = { fg = c.blue0, bold = true } -- titles for output from ":set all", ":autocmd" etc.
     theme.highlights.Constant = { fg = c.blue0 }
     theme.highlights.String = { fg = c.green2 }
     theme.highlights.Character = { fg = c.green2 }
@@ -836,6 +837,7 @@ function M.setup()
     -- LSP semantic coloring
     theme.highlights["@lsp.type.operator"] = { link = "Statement" }
     theme.highlights["@lsp.type.variable"] = { link = "@variable" }
+    theme.highlights["@lsp.type.comment"] = {} -- Treesitter does better on comments on most LSPs
     theme.highlights["@lsp.typemod.class.deduced"] = { link = "@type.builtin" }
     theme.highlights["@lsp.typemod.class.defaultLibrary"] = { link = "@type" }
     theme.highlights["@lsp.typemod.enum.defaultLibrary"] = { link = "@type" }
@@ -876,6 +878,12 @@ function M.setup()
     theme.highlights['@variable.builtin.python'] = { link = 'Keyword' }
     theme.highlights['@keyword.operator.python'] = { link = 'Keyword' }
     theme.highlights['@keyword.function.python'] = { link = 'Keyword' }
+
+    -- Git Commits
+    theme.highlights["@text.reference.gitcommit"] = { fg = c.green }
+    theme.highlights["@markup.link.gitcommit"] = { link = "@text.reference.gitcommit" }
+    theme.highlights["@text.uri.gitcommit"] = { fg = c.blue6 }
+    theme.highlights["@string.special.url.gitcommit"] = { link = "@text.uri.gitcommit" }
 
     --
     -- Plugin formatting
@@ -956,14 +964,14 @@ function M.setup()
     theme.highlights.TodoBgFix = { fg = c.bg, bg = c.error, style = 'bold' }
     theme.highlights.TodoBgHack = { fg = c.bg, bg = c.warning, style = 'bold' }
     theme.highlights.TodoBgNote = { fg = c.bg, bg = c.hint, style = 'bold' }
-    theme.highlights.TodoBgPerf = { fg = c.bg, bg = c.green1, style = 'bold' }
+    theme.highlights.TodoBgPerf = { fg = c.bg, bg = c.green, style = 'bold' }
     theme.highlights.TodoBgTest = { fg = c.bg, bg = c.blue1, style = 'bold' }
     theme.highlights.TodoBgTodo = { fg = c.bg, bg = c.info, style = 'bold' }
     theme.highlights.TodoBgWarn = { fg = c.bg, bg = c.warning, style = 'bold' }
     theme.highlights.TodoFgFix = { fg = c.error }
     theme.highlights.TodoFgHack = { fg = c.warning }
     theme.highlights.TodoFgNote = { fg = c.hint }
-    theme.highlights.TodoFgPerf = { fg = c.green1 }
+    theme.highlights.TodoFgPerf = { fg = c.green }
     theme.highlights.TodoFgTest = { fg = c.blue1 }
     theme.highlights.TodoFgTodo = { fg = c.info }
     theme.highlights.TodoFgWarn = { fg = c.warning }
