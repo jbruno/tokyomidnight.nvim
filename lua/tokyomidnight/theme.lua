@@ -812,16 +812,22 @@ function M.setup()
     theme.highlights.StorageClass = { fg = c.red }
     theme.highlights.PreProc = { fg = c.red }
     theme.highlights.Macro = { link = "Constant" }
+    theme.highlights.Field = { link = "@variable.member" }
+    theme.highlights.Parameter = { link = "@variable.parameter" }
 
     -- TreeSitter capture groups
     theme.highlights["@constant.builtin"] = { link = "Constant" }
+    theme.highlights["@constant.macro"] = { link = "Constant" }
     theme.highlights["@punctuation.delimiter"] = { fg = c.fg_dark  } -- For delimiters ie: `.`
     theme.highlights["@punctuation.bracket"] = { fg = c.fg_dark } -- For brackets and parens.
     theme.highlights["@punctuation.special"] = { fg = c.purple } -- For special symbols (e.g. `{}` in string interpolation)
     theme.highlights["@operator"] = { fg = c.red }
+    theme.highlights["@keyword.modifier"] = { link = "@operator" }
+    theme.highlights["@keyword.conditional.ternary"] = { fg = c.red }
     theme.highlights["@variable.parameter"] = { fg = c.blue5 }
-    theme.highlights["@keyword.function"] = { fg = c.purple, style = options.styles.functions }
     theme.highlights["@type.builtin"] = { fg = c.purple }
+    theme.highlights["@function.builtin"] = { link = "@function" }
+    theme.highlights["@type.qualifier"] = { link = "@operator" }
     theme.highlights["@variable"] = { fg = c.blue6, style = options.styles.variables } -- Any variable name that does not have another highlight.
     theme.highlights["@variable.builtin"] = { fg = c.purple }
     theme.highlights["@module.builtin"] = { fg = c.magenta }
@@ -866,8 +872,10 @@ function M.setup()
     theme.highlights['@repeat.python'] = { link = 'Keyword' }
     theme.highlights['@string.documentation.python'] = { link = 'Comment' }
     theme.highlights['@string.escape.python'] = { link = 'Operator' }
-    theme.highlights['@type.builtin'] = { link = 'Type' }
+    theme.highlights['@type.builtin.python'] = { link = 'Type' }
     theme.highlights['@variable.builtin.python'] = { link = 'Keyword' }
+    theme.highlights['@keyword.operator.python'] = { link = 'Keyword' }
+    theme.highlights['@keyword.function.python'] = { link = 'Keyword' }
 
     --
     -- Plugin formatting
