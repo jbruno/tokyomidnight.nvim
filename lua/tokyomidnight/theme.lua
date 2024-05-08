@@ -842,9 +842,31 @@ function M.setup()
     -- Specific language formatting
 
     -- Lua
+    theme.highlights['@constant.builtin.lua'] = { link = 'Constant' }
+    theme.highlights['@constructor.lua'] = { link = 'Delimiter' }
+    theme.highlights['@field.lua'] = { link = 'Parameter' }
+    theme.highlights['@function.builtin.lua'] = { link = 'Function' }
+    theme.highlights['@keyword.operator.lua'] = { link = 'Operator' }
+    theme.highlights['@parameter.lua'] = { link = 'Field' }
+    theme.highlights['@property.lua'] = { link = 'Parameter' }
+    theme.highlights['@repeat.lua'] = { link = 'Keyword' }
+    theme.highlights['@lsp.type.macro.lua'] = { link = 'Type' }
+    theme.highlights['@lsp.type.parameter.lua'] = { link = 'Field' }
+    theme.highlights['@lsp.type.property.lua'] = { link = 'Parameter' }
+    theme.highlights['@variable.parameter.lua'] = { link = 'Field' }
+    theme.highlights['@variable.member.lua'] = { link = 'Parameter' }
 
     -- Python
-
+    theme.highlights['@constructor.python'] = { link = 'Type' }
+    theme.highlights['@exception.python'] = { link = 'Keyword' }
+    theme.highlights['@function.builtin.python'] = { link = 'Function' }
+    theme.highlights['@include.python'] = { link = 'Include' }
+    theme.highlights['@parameter.python'] = { link = 'Parameter' }
+    theme.highlights['@repeat.python'] = { link = 'Keyword' }
+    theme.highlights['@string.documentation.python'] = { link = 'Comment' }
+    theme.highlights['@string.escape.python'] = { link = 'Operator' }
+    theme.highlights['@type.builtin'] = { link = 'Type' }
+    theme.highlights['@variable.builtin.python'] = { link = 'Keyword' }
 
     --
     -- Library formatting
