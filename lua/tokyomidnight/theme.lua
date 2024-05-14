@@ -799,8 +799,6 @@ function M.setup()
   -- Keep all midnight-specific changes here for easy updates
   if is_midnight then
 
-    -- Additional transparency support
-
     -- Common highlight groups
     theme.highlights.Character = { fg = c.green2 }
     theme.highlights.Constant = { fg = c.blue0 }
@@ -897,7 +895,14 @@ function M.setup()
 
     -- TreesitterContext
     theme.highlights.TreesitterContext.bg = options.transparent and c.none or c.bg_highlight
-    theme.highlights.TreesitterContextSeparator = { fg = options.transparent and c.terminal_black or c.none }
+    theme.highlights.TreesitterContextSeparator = {
+      fg = options.transparent and c.terminal_black or c.bg_highlight,
+      bg = options.transparent and c.none or c.bg_highlight
+    }
+    theme.highlights.TreesitterContextLineNumber = {
+      fg = options.transparent and c.fg_gutter or c.terminal_black,
+      bg = options.transparent and c.none or c.bg_highlight
+    }
 
     -- Telescope
     theme.highlights.TelescopePromptBorder.fg = c.blue
