@@ -890,7 +890,7 @@ function M.setup()
 
     -- TreesitterContext
     theme.highlights.TreesitterContext.bg = options.transparent and c.none or c.bg_highlight
-    theme.highlights.TreesitterContextSeparator = { fg = c.blue }
+    theme.highlights.TreesitterContextSeparator = { fg = c.terminal_black }
 
     -- Telescope
     theme.highlights.TelescopePromptBorder.fg = c.blue
