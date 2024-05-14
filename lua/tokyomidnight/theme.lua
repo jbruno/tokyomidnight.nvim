@@ -802,50 +802,53 @@ function M.setup()
     -- Additional transparency support
 
     -- Common highlight groups
-    theme.highlights.Title = { fg = c.blue0, bold = true } -- titles for output from ":set all", ":autocmd" etc.
-    theme.highlights.Constant = { fg = c.blue0 }
-    theme.highlights.String = { fg = c.green2 }
     theme.highlights.Character = { fg = c.green2 }
-    theme.highlights.Function = { fg = c.yellow, style = options.styles.functions } -- function name (also: methods for classes)
-    theme.highlights.Statement = { fg = c.purple }
-    theme.highlights.Operator = { fg = c.red }
-    theme.highlights.Keyword = { fg = c.purple, style = options.styles.keywords }
-    theme.highlights.StorageClass = { fg = c.red }
-    theme.highlights.PreProc = { fg = c.red }
-    theme.highlights.Macro = { link = "Constant" }
+    theme.highlights.Constant = { fg = c.blue0 }
+    theme.highlights.Delimiter = { fg = c.fg }
     theme.highlights.Field = { link = "@variable.member" }
-    theme.highlights.Parameter = { link = "@variable.parameter" }
+    theme.highlights.Function = { fg = c.yellow, style = options.styles.functions } -- function name (also: methods for classes)
+    theme.highlights.Keyword = { fg = c.purple, style = options.styles.keywords }
+    theme.highlights.Macro = { link = "Constant" }
+    theme.highlights.Parameter = { fg = c.blue5 }
+    theme.highlights.PreProc = { link = "Operator" }
+    theme.highlights.Operator = { fg = c.red }
+    theme.highlights.Statement = { fg = c.purple }
+    theme.highlights.StorageClass = { link = "Operator" }
+    theme.highlights.String = { fg = c.green2 }
+    theme.highlights.Title = { fg = c.blue0, bold = true } -- titles for output from ":set all", ":autocmd" etc.
+    theme.highlights.Variable = { fg = c.blue6, style = options.styles.variables } -- Any variable name that does not have another highlight.
 
     -- TreeSitter capture groups
     theme.highlights["@constant.builtin"] = { link = "Constant" }
     theme.highlights["@constant.macro"] = { link = "Constant" }
-    theme.highlights["@punctuation.delimiter"] = { fg = c.fg_dark  } -- For delimiters ie: `.`
-    theme.highlights["@punctuation.bracket"] = { fg = c.fg_dark } -- For brackets and parens.
-    theme.highlights["@punctuation.special"] = { fg = c.purple } -- For special symbols (e.g. `{}` in string interpolation)
-    theme.highlights["@operator"] = { fg = c.red }
-    theme.highlights["@keyword.modifier"] = { link = "@operator" }
-    theme.highlights["@keyword.conditional.ternary"] = { fg = c.red }
-    theme.highlights["@variable.parameter"] = { fg = c.blue5 }
-    theme.highlights["@type.builtin"] = { fg = c.purple }
-    theme.highlights["@function.builtin"] = { link = "@function" }
-    theme.highlights["@type.qualifier"] = { link = "@operator" }
-    theme.highlights["@variable"] = { fg = c.blue6, style = options.styles.variables } -- Any variable name that does not have another highlight.
-    theme.highlights["@variable.builtin"] = { fg = c.purple }
-    theme.highlights["@module.builtin"] = { fg = c.magenta }
+    theme.highlights["@function.builtin"] = { link = "Function" }
+    theme.highlights["@keyword.conditional.ternary"] = { link = "Operator" }
+    theme.highlights["@keyword.modifier"] = { link = "Constant" }
     theme.highlights["@module"] = { fg = c.magenta }
+    theme.highlights["@module.builtin"] = { link = "@module" }
+    theme.highlights["@operator"] = { link = "Operator" }
+    theme.highlights["@punctuation.bracket"] = { link = "Delimiter" } -- For brackets and parens.
+    theme.highlights["@punctuation.delimiter"] = { link = "Delimiter" } -- For delimiters ie: `.`
+    theme.highlights["@punctuation.special"] = { fg = c.purple } -- For special symbols (e.g. `{}` in string interpolation)
+    theme.highlights["@type.builtin"] = { link = "Keyword" }
+    theme.highlights["@type.qualifier"] = { link = "Operator" }
+    theme.highlights["@variable"] = { link = "Variable" } -- Any variable name that does not have another highlight.
+    theme.highlights["@variable.builtin"] = { link = "Constant" }
+    theme.highlights["@variable.parameter"] = { link = "Parameter" }
 
     -- LSP semantic coloring
+    theme.highlights["@lsp.type.comment"] = {} -- Treesitter does better on comments on most LSPs
     theme.highlights["@lsp.type.operator"] = { link = "Statement" }
     theme.highlights["@lsp.type.variable"] = { link = "@variable" }
-    theme.highlights["@lsp.type.comment"] = {} -- Treesitter does better on comments on most LSPs
     theme.highlights["@lsp.typemod.class.deduced"] = { link = "@type.builtin" }
     theme.highlights["@lsp.typemod.class.defaultLibrary"] = { link = "@type" }
     theme.highlights["@lsp.typemod.enum.defaultLibrary"] = { link = "@type" }
-    theme.highlights["@lsp.typemod.type.defaultLibrary"] = { link = "@type" }
-    theme.highlights["@lsp.typemod.typeAlias.defaultLibrary"] = { link = "@type" }
+    theme.highlights["@lsp.typemod.function.defaultLibrary"] = { link = "@function" }
     theme.highlights["@lsp.typemod.macro.defaultLibrary"] = { link = "@function" }
     theme.highlights["@lsp.typemod.method.defaultLibrary"] = { link = "@function" }
-    theme.highlights["@lsp.typemod.function.defaultLibrary"] = { link = "@function" }
+    theme.highlights["@lsp.typemod.type.deduced"] = { link = "@type.builtin" }
+    theme.highlights["@lsp.typemod.type.defaultLibrary"] = { link = "@type" }
+    theme.highlights["@lsp.typemod.typeAlias.defaultLibrary"] = { link = "@type" }
 
     --
     -- Specific language formatting
@@ -859,38 +862,42 @@ function M.setup()
     theme.highlights['@parameter.lua'] = { link = 'Field' }
     theme.highlights['@property.lua'] = { link = 'Parameter' }
     theme.highlights['@repeat.lua'] = { link = 'Keyword' }
+    theme.highlights['@variable.parameter.lua'] = { link = 'Field' }
+    theme.highlights['@variable.member.lua'] = { link = 'Parameter' }
     theme.highlights['@lsp.type.macro.lua'] = { link = 'Type' }
     theme.highlights['@lsp.type.parameter.lua'] = { link = 'Field' }
     theme.highlights['@lsp.type.property.lua'] = { link = 'Parameter' }
-    theme.highlights['@variable.parameter.lua'] = { link = 'Field' }
-    theme.highlights['@variable.member.lua'] = { link = 'Parameter' }
 
     -- Python
     theme.highlights['@constructor.python'] = { link = 'Type' }
     theme.highlights['@exception.python'] = { link = 'Keyword' }
     theme.highlights['@function.builtin.python'] = { link = 'Function' }
     theme.highlights['@include.python'] = { link = 'Include' }
+    theme.highlights['@keyword.operator.python'] = { link = 'Keyword' }
+    theme.highlights['@keyword.function.python'] = { link = 'Keyword' }
     theme.highlights['@parameter.python'] = { link = 'Parameter' }
     theme.highlights['@repeat.python'] = { link = 'Keyword' }
     theme.highlights['@string.documentation.python'] = { link = 'Comment' }
     theme.highlights['@string.escape.python'] = { link = 'Operator' }
     theme.highlights['@type.builtin.python'] = { link = 'Type' }
     theme.highlights['@variable.builtin.python'] = { link = 'Keyword' }
-    theme.highlights['@keyword.operator.python'] = { link = 'Keyword' }
-    theme.highlights['@keyword.function.python'] = { link = 'Keyword' }
+
+    -- C++
+    theme.highlights["@lsp.typemod.class.deduced"] = { link = "@type.builtin" }
+    theme.highlights["@lsp.typemod.type.deduced"] = { link = "@type.builtin" }
 
     -- Git Commits
-    theme.highlights["@text.reference.gitcommit"] = { fg = c.green }
     theme.highlights["@markup.link.gitcommit"] = { link = "@text.reference.gitcommit" }
-    theme.highlights["@text.uri.gitcommit"] = { fg = c.blue6 }
     theme.highlights["@string.special.url.gitcommit"] = { link = "@text.uri.gitcommit" }
+    theme.highlights["@text.reference.gitcommit"] = { fg = c.green }
+    theme.highlights["@text.uri.gitcommit"] = { fg = c.blue6 }
 
     --
     -- Plugin formatting
 
     -- TreesitterContext
     theme.highlights.TreesitterContext.bg = options.transparent and c.none or c.bg_highlight
-    theme.highlights.TreesitterContextSeparator = { fg = c.terminal_black }
+    theme.highlights.TreesitterContextSeparator = { fg = options.transparent and c.terminal_black or c.none }
 
     -- Telescope
     theme.highlights.TelescopePromptBorder.fg = c.blue
