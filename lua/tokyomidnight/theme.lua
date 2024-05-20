@@ -798,7 +798,6 @@ function M.setup()
 
   -- Keep all midnight-specific changes here for easy updates
   if is_midnight then
-
     -- Common highlight groups
     theme.highlights.Character = { fg = c.green2 }
     theme.highlights.Constant = { fg = c.blue0 }
@@ -852,37 +851,41 @@ function M.setup()
     -- Specific language formatting
 
     -- Lua
-    theme.highlights['@constant.builtin.lua'] = { link = 'Constant' }
-    theme.highlights['@constructor.lua'] = { link = 'Delimiter' }
-    theme.highlights['@field.lua'] = { link = 'Parameter' }
-    theme.highlights['@function.builtin.lua'] = { link = 'Function' }
-    theme.highlights['@keyword.operator.lua'] = { link = 'Operator' }
-    theme.highlights['@parameter.lua'] = { link = 'Field' }
-    theme.highlights['@property.lua'] = { link = 'Parameter' }
-    theme.highlights['@repeat.lua'] = { link = 'Keyword' }
-    theme.highlights['@variable.parameter.lua'] = { link = 'Field' }
-    theme.highlights['@variable.member.lua'] = { link = 'Parameter' }
-    theme.highlights['@lsp.type.macro.lua'] = { link = 'Type' }
-    theme.highlights['@lsp.type.parameter.lua'] = { link = 'Field' }
-    theme.highlights['@lsp.type.property.lua'] = { link = 'Parameter' }
+    theme.highlights["@constant.builtin.lua"] = { link = "Constant" }
+    theme.highlights["@constructor.lua"] = { link = "Delimiter" }
+    theme.highlights["@field.lua"] = { link = "Parameter" }
+    theme.highlights["@function.builtin.lua"] = { link = "Function" }
+    theme.highlights["@keyword.operator.lua"] = { link = "Operator" }
+    theme.highlights["@parameter.lua"] = { link = "Field" }
+    theme.highlights["@property.lua"] = { link = "Parameter" }
+    theme.highlights["@repeat.lua"] = { link = "Keyword" }
+    theme.highlights["@variable.parameter.lua"] = { link = "Field" }
+    theme.highlights["@variable.member.lua"] = { link = "Parameter" }
+    theme.highlights["@lsp.type.macro.lua"] = { link = "Type" }
+    theme.highlights["@lsp.type.parameter.lua"] = { link = "Field" }
+    theme.highlights["@lsp.type.property.lua"] = { link = "Parameter" }
 
     -- Python
-    theme.highlights['@constructor.python'] = { link = 'Type' }
-    theme.highlights['@exception.python'] = { link = 'Keyword' }
-    theme.highlights['@function.builtin.python'] = { link = 'Function' }
-    theme.highlights['@include.python'] = { link = 'Include' }
-    theme.highlights['@keyword.operator.python'] = { link = 'Keyword' }
-    theme.highlights['@keyword.function.python'] = { link = 'Keyword' }
-    theme.highlights['@parameter.python'] = { link = 'Parameter' }
-    theme.highlights['@repeat.python'] = { link = 'Keyword' }
-    theme.highlights['@string.documentation.python'] = { link = 'Comment' }
-    theme.highlights['@string.escape.python'] = { link = 'Operator' }
-    theme.highlights['@type.builtin.python'] = { link = 'Type' }
-    theme.highlights['@variable.builtin.python'] = { link = 'Keyword' }
+    theme.highlights["@constructor.python"] = { link = "Type" }
+    theme.highlights["@exception.python"] = { link = "Keyword" }
+    theme.highlights["@function.builtin.python"] = { link = "Function" }
+    theme.highlights["@include.python"] = { link = "Include" }
+    theme.highlights["@keyword.operator.python"] = { link = "Keyword" }
+    theme.highlights["@keyword.function.python"] = { link = "Keyword" }
+    theme.highlights["@parameter.python"] = { link = "Parameter" }
+    theme.highlights["@repeat.python"] = { link = "Keyword" }
+    theme.highlights["@string.documentation.python"] = { link = "Comment" }
+    theme.highlights["@string.escape.python"] = { link = "Operator" }
+    theme.highlights["@type.builtin.python"] = { link = "Type" }
+    theme.highlights["@variable.builtin.python"] = { link = "Keyword" }
 
     -- C++
     theme.highlights["@lsp.typemod.class.deduced"] = { link = "@type.builtin" }
     theme.highlights["@lsp.typemod.type.deduced"] = { link = "@type.builtin" }
+
+    -- YAML
+    theme.highlights["@string.yaml"] = { link = "Variable" }
+    theme.highlights["@property.yaml"] = { link = "String" }
 
     -- Git Commits
     theme.highlights["@markup.link.gitcommit"] = { link = "@text.reference.gitcommit" }
@@ -897,11 +900,11 @@ function M.setup()
     theme.highlights.TreesitterContext.bg = options.transparent and c.none or c.bg_highlight
     theme.highlights.TreesitterContextSeparator = {
       fg = options.transparent and c.terminal_black or c.bg_highlight,
-      bg = options.transparent and c.none or c.bg_highlight
+      bg = options.transparent and c.none or c.bg_highlight,
     }
     theme.highlights.TreesitterContextLineNumber = {
       fg = options.transparent and c.fg_gutter or c.terminal_black,
-      bg = options.transparent and c.none or c.bg_highlight
+      bg = options.transparent and c.none or c.bg_highlight,
     }
 
     -- Telescope
@@ -973,13 +976,13 @@ function M.setup()
     theme.highlights.BufferCurrentTarget = { bg = active_bg, fg = c.cyan, bold = true }
 
     -- TodoComments
-    theme.highlights.TodoBgFix = { fg = c.bg, bg = c.error, style = 'bold' }
-    theme.highlights.TodoBgHack = { fg = c.bg, bg = c.warning, style = 'bold' }
-    theme.highlights.TodoBgNote = { fg = c.bg, bg = c.hint, style = 'bold' }
-    theme.highlights.TodoBgPerf = { fg = c.bg, bg = c.green, style = 'bold' }
-    theme.highlights.TodoBgTest = { fg = c.bg, bg = c.blue1, style = 'bold' }
-    theme.highlights.TodoBgTodo = { fg = c.bg, bg = c.info, style = 'bold' }
-    theme.highlights.TodoBgWarn = { fg = c.bg, bg = c.warning, style = 'bold' }
+    theme.highlights.TodoBgFix = { fg = c.bg, bg = c.error, style = "bold" }
+    theme.highlights.TodoBgHack = { fg = c.bg, bg = c.warning, style = "bold" }
+    theme.highlights.TodoBgNote = { fg = c.bg, bg = c.hint, style = "bold" }
+    theme.highlights.TodoBgPerf = { fg = c.bg, bg = c.green, style = "bold" }
+    theme.highlights.TodoBgTest = { fg = c.bg, bg = c.blue1, style = "bold" }
+    theme.highlights.TodoBgTodo = { fg = c.bg, bg = c.info, style = "bold" }
+    theme.highlights.TodoBgWarn = { fg = c.bg, bg = c.warning, style = "bold" }
     theme.highlights.TodoFgFix = { fg = c.error }
     theme.highlights.TodoFgHack = { fg = c.warning }
     theme.highlights.TodoFgNote = { fg = c.hint }
@@ -987,14 +990,13 @@ function M.setup()
     theme.highlights.TodoFgTest = { fg = c.blue1 }
     theme.highlights.TodoFgTodo = { fg = c.info }
     theme.highlights.TodoFgWarn = { fg = c.warning }
-    theme.highlights.TodoSignFix = { link = 'TodoFgFix' }
-    theme.highlights.TodoSignHack = { link = 'TodoFgHack' }
-    theme.highlights.TodoSignNote = { link = 'TodoFgNote' }
-    theme.highlights.TodoSignPerf = { link = 'TodoFgPerf' }
-    theme.highlights.TodoSignTest = { link = 'TodoFgTest' }
-    theme.highlights.TodoSignTodo = { link = 'TodoFgTodo' }
-    theme.highlights.TodoSignWarn = { link = 'TodoFgWarn' }
-
+    theme.highlights.TodoSignFix = { link = "TodoFgFix" }
+    theme.highlights.TodoSignHack = { link = "TodoFgHack" }
+    theme.highlights.TodoSignNote = { link = "TodoFgNote" }
+    theme.highlights.TodoSignPerf = { link = "TodoFgPerf" }
+    theme.highlights.TodoSignTest = { link = "TodoFgTest" }
+    theme.highlights.TodoSignTodo = { link = "TodoFgTodo" }
+    theme.highlights.TodoSignWarn = { link = "TodoFgWarn" }
   end
 
   -- lsp symbol kind and completion kind highlights
