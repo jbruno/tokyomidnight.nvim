@@ -997,6 +997,30 @@ function M.setup()
     theme.highlights.TodoSignTest = { link = "TodoFgTest" }
     theme.highlights.TodoSignTodo = { link = "TodoFgTodo" }
     theme.highlights.TodoSignWarn = { link = "TodoFgWarn" }
+
+    -- Blink
+    theme.highlights.BlinkCmpDoc = { fg = c.fg, bg = c.bg_float }
+    theme.highlights.BlinkCmpDocBorder = { fg = c.border_highlight, bg = c.bg_float }
+    theme.highlights.BlinkCmpGhostText = { fg = c.terminal_black }
+    theme.highlights.BlinkCmpKindCodeium = { fg = c.teal, bg = c.none }
+    theme.highlights.BlinkCmpKindCopilot = { fg = c.teal, bg = c.none }
+    theme.highlights.BlinkCmpKindDefault = { fg = c.fg_dark, bg = c.none }
+    theme.highlights.BlinkCmpKindSupermaven = { fg = c.teal, bg = c.none }
+    theme.highlights.BlinkCmpKindTabNine = { fg = c.teal, bg = c.none }
+    theme.highlights.BlinkCmpLabel = { fg = c.fg, bg = c.none }
+    theme.highlights.BlinkCmpLabelDeprecated = { fg = c.fg_gutter, bg = c.none, strikethrough = true }
+    theme.highlights.BlinkCmpLabelMatch = { fg = c.blue1, bg = c.none }
+    theme.highlights.BlinkCmpMenu = { fg = c.fg, bg = c.bg_float }
+    theme.highlights.BlinkCmpMenuBorder = { fg = c.border_highlight, bg = c.bg_float }
+    theme.highlights.BlinkCmpSignatureHelp = { fg = c.fg, bg = c.bg_float }
+    theme.highlights.BlinkCmpSignatureHelpBorder = { fg = c.border_highlight, bg = c.bg_float }
+    theme.highlights.BlinkCmpSignatureHelpActiveParameter = { fg = nil, bg = util.darken(c.blue7, 0.5), bold = true }
+
+    -- LSP Highlights
+    local lsp_hl_color = util.darken(c.blue7, 0.55)
+    theme.highlights.LspReferenceText = { bg = lsp_hl_color }
+    theme.highlights.LspReferenceRead = { bg = lsp_hl_color }
+    theme.highlights.LspReferenceWrite = { bg = lsp_hl_color }
   end
 
   -- lsp symbol kind and completion kind highlights
